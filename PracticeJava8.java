@@ -3,6 +3,7 @@ package Java8;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 public class PracticeJava8 {
@@ -20,18 +21,18 @@ public class PracticeJava8 {
 		
 		//step2:create method that prints all data
 		System.out.println("Printing all Elemeents in list");
-		printConditionally(people,p->true);
+		printConditionally(people,p->true,p->System.out.println(p));
 		
 		//step3:create method that prints last nam estart with m
 		System.out.println("Person Start with last Name = m");
-		printConditionally(people,p->p.getLastName().startsWith("M"));
+		printConditionally(people,p->p.getLastName().startsWith("M"),p->System.out.println(p.getLastName()));
 	}
 
-	private static void printConditionally(List<Person> people, Predicate<Person> predicate) {
+	private static void printConditionally(List<Person> people, Predicate<Person> predicate,Consumer<Person> consumer) {
 
 		for(Person p:people){
 			if(predicate.test(p)){
-				System.out.println(p);
+				consumer.accept(p);
 			}
 		}
 	}
